@@ -1,0 +1,31 @@
+extends layout
+block content
+    form.container(action="/sign-up" method="POST")
+        div.col-3(class="mb-3")
+            label(for="name" class="form-label") Name
+            input( type="text" class="form-control" id="name" aria-describedby="name" name="name" placeholder="Jason" value=(name ? name : ''))
+
+        div.col-3(class="mb-3")
+            label(for="surname" class="form-label") Surname
+            input( type="text" class="form-control" id="surname" aria-describedby="surname" name="surname" placeholder="Born" value=(surname ? surname : ''))
+
+        div.col-3(class="mb-3")
+            label(for="email" class="form-label") Email address
+            input( type="email" class="form-control" id="email" aria-describedby="email" name="email" value=(email ? email : ''))
+            div( id="emailHelp" class="form-text") We'll never share your email with anyone else.
+
+        div.col-3(class="mb-3")
+            label( for="password" class="form-label") Password
+            input( type="password" class="form-control" id="password" name="password" value=(password ? password : ''))
+
+        div.col-3(class="mb-3")
+            label( for="confirm-password" class="form-label") Confirm Password
+            input( type="password" class="form-control" id="confirm-password" name="confirmPassword" value=(confirmPassword ? confirmPassword : ''))
+
+        button( type="submit" class="btn btn-primary") Submit
+        a.d-inline-block.ms-3.text-secondary.col-3(href='/sign-in') Or sign-in ->
+
+        if(errors)
+            ul
+                each error in errors
+                    li.text-danger=error.msg

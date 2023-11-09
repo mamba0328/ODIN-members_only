@@ -3,7 +3,13 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.redirect('/sign-in');
+    req.logout((err) => {
+        if(err){
+            return next(err)
+        }
+        res.redirect('/')
+    })
 });
+
 
 module.exports = router;
