@@ -12,6 +12,9 @@ var signInRouter = require('./routes/sign-in');
 var signUpRouter = require('./routes/sign-up');
 var logOutRouter = require('./routes/log-out');
 var confirmMembershipRouter = require('./routes/confirm-membership');
+var messageRouter = require('./routes/message');
+var createMessage = require('./routes/create-message');
+
 
 const passport = require('./passport/passport')
 
@@ -33,8 +36,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(connectToMongoDB)
 app.use(session({
   secret: "cats",
-  resave: false,
   saveUninitialized: true,
+  resave: true,
   cookie: {
     maxAge: 24 * 60 * 60 * 1000 //day = hours * minutes * seconds * milliseconds
   }
@@ -44,7 +47,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-  console.log(req.user ?? 'no user');
   next();
 })
 
@@ -53,10 +55,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(setCurrentUser);
 
 // ROUTES
+app.use('/create-message', createMessage)
+app.use('/message', messageRouter)
 app.use('/confirm-membership', confirmMembershipRouter)
 app.use('/sign-in', signInRouter);
 app.use('/sign-up', signUpRouter);
-app.use('/log-out', logOutRouter); // Corrected the path here
+app.use('/log-out', logOutRouter);
 app.use('/home', homeRouter);
 app.use('/', indexRouter);
 

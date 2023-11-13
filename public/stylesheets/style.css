@@ -6,3 +6,33 @@ body {
 a {
   color: #00B7FF;
 }
+
+.message{
+  list-style: none;
+  padding: 25px;
+}
+
+.message__wrapper{
+  box-shadow: 3px 3px 3px 3px #d6d6d6;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+.message__field {
+  border: none;
+  background-color: #FFF;
+  color: #262626;
+  width: 100%;
+}
+
+.message__field_title {
+  font-size: 2rem;
+}
+
+.message__field_user {
+  font-size: 0.8rem;
+}
+
+.message__row {
+  display: flex;
+}

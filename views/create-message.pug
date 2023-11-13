@@ -1,0 +1,19 @@
+extends layout
+block content
+    form.container(action="/create-message" method="POST")
+        div.col-3(class="mb-3")
+            label(for="messageTitle" class="form-label") Title of the message
+            input( type="text" class="form-control" id="messageTitle" aria-describedby="title" name="messageTitle" value=(messageTitle ? messageTitle : ''))
+
+        div.col-3(class="mb-3")
+            label( for="messageContent" class="form-label") Your message
+            textarea(class="form-control" rows="3" id="messageContent" name="messageContent")= messageContent ? messageContent : ''
+
+        button( type="submit" class="btn btn-primary") Submit
+
+        if(errors)
+            ul
+                each error in errors
+                    li.text-danger=error.msg
+        else if (message)
+            p.text-danger=message

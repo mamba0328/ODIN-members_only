@@ -11,10 +11,13 @@ block content
                 input( type="text" class="form-control" id="answer" aria-describedby="answer" name="answer" value=(answer ? answer : ''))
 
             button( type="submit" class="btn btn-primary") Submit
+            a.ms-3(href='/home') <- Or go back to home
 
             if(errors)
-                ul
+                ul.pt-3
                     each error in errors
                         li.text-danger=error.msg
             else if (message)
                 p.text-danger=message
+
+

@@ -1,3 +1,29 @@
 extends layout
 block content
-    h4 You've logged in
+    div.d-flex.align-items-center
+        h4=`Hello ${currentUser.name}`
+        a.ms-3(href="/log-out") log-out -->
+    if(currentUser.is_member !== true)
+        a(href="/confirm-membership") Confirm that you are a member! -->
+    else
+        a(href="/create-message") Create message! -->
+
+
+    ul
+        each message in messages
+            li.message
+                form.container.message__wrapper(action=`/message/delete/${message._id}` method="DELETE")
+                    div.message__row(class="mb-1")
+                        input.message__field.message__field_title( type="text" value=(message.title) disabled=true)
+                    if(currentUser.is_member === true)
+                        div.message__row(class="mb-3")
+                            input.message__field.message__field_user( type="text" value=(message.user.userName) disabled=true)
+                    div.message__row(class="mb-3")
+                        text-area.message__field.message__field_content( type="text" disabled=true)=message.content
+                    if(currentUser.is_member === true)
+                        div.message__row(class="mb-3")
+                            input.message__field.message__field_date( type="text" value=(message.created_at) disabled=true)
+
+                    if(currentUser.is_admin === true)
+                        button( type="submit" class="btn btn-danger") DELETE
+

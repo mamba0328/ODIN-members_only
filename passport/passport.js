@@ -12,7 +12,6 @@ passport.use(new LocalStrategy({
     },
     async function(username, password, done) {
         try {
-            console.log(username, password)
             const user = await User.findOne({ email: username });
             if (!user) {
                 return done(null, false, { message: "Incorrect email" });
