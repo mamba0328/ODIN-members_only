@@ -1,0 +1,20 @@
+extends layout
+block content
+
+    if(currentUser.is_member)
+        h4 You already answered the secret question
+        a(href='/home') <- Go back to home
+    else
+        form.container(action="/confirm-membership" method="POST")
+            div.col-3(class="mb-3")
+                label(for="answer" class="form-label") What is the meaning of life, the universe and everything else?
+                input( type="text" class="form-control" id="answer" aria-describedby="answer" name="answer" value=(answer ? answer : ''))
+
+            button( type="submit" class="btn btn-primary") Submit
+
+            if(errors)
+                ul
+                    each error in errors
+                        li.text-danger=error.msg
+            else if (message)
+                p.text-danger=message

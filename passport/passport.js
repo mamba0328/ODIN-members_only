@@ -10,9 +10,9 @@ passport.use(new LocalStrategy({
         usernameField: 'email',    // define the parameter in req.body that passport can use as username and password
         passwordField: 'password'
     },
-    async function(username, password, done) { // depending on your strategy, you might not need this function ...
+    async function(username, password, done) {
         try {
-
+            console.log(username, password)
             const user = await User.findOne({ email: username });
             if (!user) {
                 return done(null, false, { message: "Incorrect email" });

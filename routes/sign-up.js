@@ -6,7 +6,7 @@ const signUpPost = require('../controllers/sign-up')
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('sign-up', {title: 'Sign-up'});
-});
+},);
 
 router.post('/', signUpPost);
 

@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     res.render('sign-in', {title: 'Sign-in'});
 });
 
-router.post('/',     passport.authenticate("local", {
+router.post('/',  passport.authenticate("local", {
     successRedirect: "/home",
     failureRedirect: "/sign-in"
 }));
